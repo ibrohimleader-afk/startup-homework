@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirli Ishlar Byurosi — Aloqa</title>
+</head>
+<body>
+
+    <header>
+        <h1>Sirli Ishlar Byurosi</h1>
+        <p><i>"Har bir sir o'z yechimini topadi"</i></p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Bosh sahifa</a></li>
+            <li><a href="cases.html">Ishlar ro'yxati</a></li>
+            <li><a href="detectives.html">Detektivlarimiz</a></li>
+            <li><a href="contact.html">Aloqa</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="contact-form-section">
+            <h2>Bizga ish bering yoki yordam so'rang</h2>
+
+            <form action="#" method="post">
+                <p>
+                    <label for="client-name">Ismingiz:</label><br>
+                    <input type="text" id="client-name" name="name" required>
+                </p>
+                <p>
+                    <label for="client-phone">Telefon raqamingiz:</label><br>
+                    <input type="tel" id="client-phone" name="phone" placeholder="+998" required>
+                </p>
+                <p>
+                    <label for="case-type">Ish turi:</label><br>
+                    <select id="case-type" name="type">
+                        <option value="ogrilik">O'g'rilik</option>
+                        <option value="yoqolish">Yo'qolish</option>
+                        <option value="firbgarlik">Firbgarlik</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="case-description">Ishning qisqa tavsifi:</label><br>
+                    <textarea id="case-description" name="description" rows="5" cols="40" required></textarea>
+                </p>
+                <p>
+                    <button type="submit">Ariza yuborish</button>
+                </p>
+            </form>
+        </section>
+
+        <hr>
+
+        <section id="office-info">
+            <h3>Bizning manzilimiz</h3>
+            <address>
+                <strong>"Sirli Ishlar Byurosi" Detektiv Agentligi</strong><br>
+                Amir Temur ko'chasi, 45-bino, Toshkent<br>
+                Tel: <a href="tel:+998711234567">+998 (71) 123-45-67</a>
+            </address>
+
+            <br>
+            <!-- Карта заменена на аккуратный текстовый блок -->
+            <h3>Xaritada ko'rinishi</h3>
+            <p><i>Xarita yuklanmoqda... (Ofisimiz Amir Temur xiyoboni yaqinida joylashgan)</i></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 "Sirli Ishlar Byurosi". Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+</body>
+</html>

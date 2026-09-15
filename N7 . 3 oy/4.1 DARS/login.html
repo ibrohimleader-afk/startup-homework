@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login forma</title>
+
+    <style>
+        /* Element selektor */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+        }
+
+        input {
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        /* Class selektor */
+        .login-box {
+            width: 300px;
+            margin: 100px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* ID selektor */
+        #email {
+            border: 2px solid blue;
+        }
+
+        /* Guruh selektor */
+        h2, label, p {
+            color: #333;
+        }
+
+        /* Spetsifiklik:
+           input — element selektor, sariq rang beradi.
+           .special — class selektor, ko'k rang beradi.
+           Class element selektoridan kuchliroq,
+           shuning uchun ko'k rang chiqadi. */
+        input.special {
+            background-color: blue;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h2>Login</h2>
+
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="Email">
+
+        <label>Parol:</label>
+        <input type="password" class="special" placeholder="Parol">
+
+        <p>Hisobingizga kiring</p>
+
+        <button>Kirish</button>
+    </div>
+
+</body>
+</html>

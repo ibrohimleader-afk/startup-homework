@@ -1,0 +1,44 @@
+/* Element selektor */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    margin: 0;
+    padding: 50px;
+}
+
+/* Class selektor */
+.card {
+    width: 400px;
+    margin: auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* ID selektor */
+#title {
+    color: darkblue;
+}
+
+/* Guruh selektor */
+h1, h2, li {
+    font-family: Arial, sans-serif;
+}
+
+/* Class можно использовать несколько раз */
+.text {
+    color: #444;
+    line-height: 1.6;
+}
+
+/* Element selektor */
+img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+/* Element selektor */
+ul {
+    text-align: left;
+}

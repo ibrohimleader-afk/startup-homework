@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise List - Fitness & Sport Program</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7f9fa;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        nav {
+            margin-top: 24px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+        nav a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s ease;
+        }
+        nav a:hover {
+            color: #1a1a1a;
+        }
+        nav a.active {
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        .site-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 44px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            width: 92%;
+            max-width: 900px;
+            padding: 48px;
+            box-sizing: border-box;
+            margin-bottom: 40px;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 36px;
+            letter-spacing: -0.3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #666;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #edf1f2;
+        }
+
+        td {
+            padding: 24px 0;
+            border-bottom: 1px solid #edf1f2;
+            font-size: 15px;
+            vertical-align: top;
+        }
+
+        td a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+        td a:hover {
+            color: #d63384;
+        }
+
+        .exercise-desc {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        .muscle-text {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .highlight-reps {
+            color: #d63384;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        th:first-child, td:first-child { width: 45%; padding-right: 20px; }
+        th:nth-child(2), td:nth-child(2) { width: 35%; padding-right: 20px; }
+        th:last-child, td:last-child { width: 20%; }
+
+        footer {
+            margin-top: auto;
+            margin-bottom: 36px;
+            font-size: 13px;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a> | 
+        <a href="exercises.html" class="active">Exercises</a> | 
+        <a href="exercise-detail.html">Exercise Detail</a> | 
+        <a href="plan.html">Weekly Plan</a> | 
+        <a href="contact.html">Contact Coach</a>
+    </nav>
+
+    <h1 class="site-title">Fitness & Sport Program</h1>
+
+    <div class="card">
+        <h2>Exercise List</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercise Name</th>
+                    <th>Muscle Group</th>
+                    <th>Reps / Sets</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Squats</a>
+                        <span class="exercise-desc">Keep your feet shoulder-width apart, lower your hips until thighs are parallel to the floor, and push back up through your heels.</span>
+                    </td>
+                    <td class="muscle-text">Quads, Glutes & Hamstrings</td>
+                    <td class="highlight-reps">3 x 12 reps</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Push-ups</a>
+                        <span class="exercise-desc">Maintain a rigid plank position, lower your chest until it nearly touches the ground, then drive upwards keeping elbows stable.</span>
+                    </td>
+                    <td class="muscle-text">Chest, Triceps & Anterior Deltoids</td>
+                    <td class="highlight-reps">4 x 15 reps</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Pull-ups</a>
+                        <span class="exercise-desc">Hang from a bar with an overhand grip, pull your body weight up until your chin clears the bar, and lower yourself under control.</span>
+                    </td>
+                    <td class="muscle-text">Lats, Rhomboids & Upper Back</td>
+                    <td class="highlight-reps">3 x 8 reps</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Plank</a>
+                        <span class="exercise-desc">Support your body weight on your forearms and toes, squeezing your glutes and core tightly without letting your lower back sag.</span>
+                    </td>
+                    <td class="muscle-text">Core, Transverse Abdominis & Lower Back</td>
+                    <td class="highlight-reps">3 x 60 seconds</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Dips</a>
+                        <span class="exercise-desc">Lower your body using parallel bars until your shoulders are below your elbows, then press back up explosively.</span>
+                    </td>
+                    <td class="muscle-text">Lower Chest & Triceps Brachii</td>
+                    <td class="highlight-reps">3 x 10 reps</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="exercise-detail.html">Lunges</a>
+                        <span class="exercise-desc">Step forward with one leg, lowering your hips until both knees are bent at a 90-degree angle, then return to the starting stance.</span>
+                    </td>
+                    <td class="muscle-text">Quadriceps & Calf Muscles</td>
+                    <td class="highlight-reps">3 x 15 reps</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Fitness Program.</p>
+    </footer>
+
+</body>
+</html>
+
+
+

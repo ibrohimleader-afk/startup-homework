@@ -1,0 +1,3279 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SYSTEM</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            color: white;
+        }
+
+        body {
+            font-family:
+                "Special Elite",
+                "Courier New",
+                monospace;
+        }
+
+        button {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.45);
+            padding: 12px 25px;
+            font-family:
+                "Special Elite",
+                monospace;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.08);
+            transform: scale(1.05);
+        }
+
+        /* ==================================================
+           REGISTER / LOGIN
+        ================================================== */
+
+        .formScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .formScreen.active {
+            display: flex;
+        }
+
+        .formBox {
+            width: 350px;
+            max-width: 90vw;
+        }
+
+        .formTitle {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 42px;
+            letter-spacing: 5px;
+            margin-bottom: 35px;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.4);
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .field input {
+            width: 100%;
+            height: 42px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.35);
+            color: white;
+            outline: none;
+            text-align: center;
+            font-family:
+                "Special Elite",
+                monospace;
+            font-size: 14px;
+        }
+
+        .field input:focus {
+            border-color: white;
+            box-shadow:
+                0 0 10px rgba(255,255,255,0.15);
+        }
+
+        .formMessage {
+            min-height: 20px;
+            margin-top: 20px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* ==================================================
+           INTRO
+        ================================================== */
+
+        #introScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            z-index: 900;
+        }
+
+        #introScreen.active {
+            display: flex;
+        }
+
+        #introText {
+            font-size: 30px;
+            letter-spacing: 7px;
+            opacity: 0;
+            transition:
+                opacity 0.6s,
+                transform 0.6s;
+        }
+
+        #introText.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================================================
+           MAIN SYSTEM
+        ================================================== */
+        #mainSystem {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            background: #000;
+            z-index: 100;
+        }
+
+        #mainSystem.active {
+            display: block;
+        }
+
+        #mainSystem > img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #darkOverlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 35%,
+                    rgba(0,0,0,0.65) 100%
+                );
+            z-index: 110;
+            pointer-events: none;
+        }
+
+        /* ==================================================
+           MOOD CHECK
+        ================================================== */
+
+        #moodCheck {
+            position: absolute;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 200;
+            padding: 20px;
+        }
+
+        #moodCheck.active {
+            display: flex;
+        }
+
+        .moodContent {
+            width: min(800px, 92vw);
+            padding: 25px;
+            background: rgba(0,0,0,0.22);
+            animation: appear 0.8s ease;
+        }
+
+        .moodTitle {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 48px;
+            letter-spacing: 6px;
+            margin-bottom: 5px;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.5);
+            animation: flicker 4s infinite;
+        }
+
+        .moodCounter {
+            font-size: 10px;
+            letter-spacing: 4px;
+            opacity: 0.55;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 27px;
+            line-height: 1.5;
+            letter-spacing: 2px;
+            min-height: 80px;
+            margin-bottom: 20px;
+            text-shadow:
+                0 0 8px black;
+        }
+
+        .answerArea {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .answerButton {
+            margin: 0;
+            min-width: 110px;
+        }
+
+        .textAnswer {
+            width: min(500px, 85vw);
+            height: 45px;
+            background: rgba(0,0,0,0.45);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.5);
+            outline: none;
+            text-align: center;
+            font-family:
+                "Special Elite",
+                monospace;
+            padding: 10px;
+        }
+
+        .textAnswer::placeholder {
+            color: #aaa;
+        }
+
+        .continueButton {
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        /* ==================================================
+           GLITCH
+        ================================================== */
+
+        .glitch {
+            animation: glitch 0.45s steps(2);
+        }
+
+        @keyframes glitch {
+
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-5px,2px);
+            }
+
+            40% {
+                transform: translate(5px,-2px);
+            }
+
+            60% {
+                transform: translate(-3px,0);
+            }
+
+            80% {
+                transform: translate(3px,1px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+
+        }
+
+        @keyframes flicker {
+
+            0%,
+            90%,
+            100% {
+                opacity: 1;
+            }
+
+            91% {
+                opacity: 0.4;
+            }
+
+            93% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 0.6;
+            }
+
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* ==================================================
+           FLASH + SHAKE
+        ================================================== */
+
+        #flashEffect {
+            position: absolute;
+            inset: 0;
+            z-index: 800;
+            pointer-events: none;
+            opacity: 0;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.9),
+                    transparent 55%
+                );
+        }
+
+        #flashEffect.active {
+            animation: flash 0.5s ease;
+        }
+
+        @keyframes flash {
+
+            0% {
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            35% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0;
+            }
+
+        }
+
+        #mainSystem.shake {
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-7px,3px);
+            }
+
+            40% {
+                transform: translate(7px,-3px);
+            }
+
+            60% {
+                transform: translate(-4px,-2px);
+            }
+
+            80% {
+                transform: translate(4px,2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+
+        }
+
+        /* ==================================================
+           MOOD COMPLETE
+        ================================================== */
+
+        #moodComplete {
+            position: absolute;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 600;
+            background: rgba(0,0,0,0.18);
+        }
+
+        #moodComplete.active {
+            display: flex;
+            animation: appear 0.8s ease;
+        }
+
+        .completeTitle {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 45px;
+            letter-spacing: 5px;
+        }
+
+        .completeText {
+            margin-top: 12px;
+            font-size: 11px;
+            letter-spacing: 4px;
+            opacity: 0.6;
+        }
+
+        /* ==================================================
+           CHECKLIST SCREEN
+        ================================================== */
+
+        #checklistScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 700;
+            padding: 20px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #checklistScreen.active {
+            display: flex;
+            animation: checklistAppear 1s ease;
+        }
+
+        .checklistBackground {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .checklistDarkOverlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    rgba(0,0,0,0.15) 20%,
+                    rgba(0,0,0,0.78) 100%
+                );
+        }
+
+        @keyframes checklistAppear {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+        .checklistContent {
+            position: relative;
+            z-index: 2;
+            width: min(680px, 94vw);
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.38);
+            animation: appear 0.8s ease;
+        }
+
+        .checklistContent::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .checklistContent::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .checklistTitle {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 43px;
+            letter-spacing: 5px;
+            text-align: center;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .checklistDate {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 3px;
+            opacity: 0.55;
+            margin-bottom: 10px;
+        }
+
+        /* ==================================================
+           STREAK
+        ================================================== */
+
+        .streakText {
+            text-align: center;
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow:
+                0 0 8px rgba(255,255,255,0.4);
+        }
+
+        /* ==================================================
+           PROGRESS
+        ================================================== */
+
+        .progressInfo {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 7px;
+        }
+
+        .progressBar {
+            width: 100%;
+            height: 13px;
+            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        #progressFill {
+            width: 0%;
+            height: 100%;
+            background: white;
+            box-shadow:
+                0 0 15px rgba(255,255,255,0.8);
+            transition:
+                width 0.7s cubic-bezier(.17,.67,.3,1.3);
+        }
+
+        #scoreText {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            opacity: 0.7;
+        }
+
+        /* ==================================================
+           CHECK ITEMS
+        ================================================== */
+
+        #checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .checkItem {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 13px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(0,0,0,0.28);
+            transition: 0.25s;
+        }
+
+        .checkItem:hover {
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .checkLeft {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkBox {
+            appearance: none;
+            width: 21px;
+            height: 21px;
+            border: 1px solid rgba(255,255,255,0.6);
+            background: rgba(0,0,0,0.6);
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .checkBox:checked {
+            background: white;
+            animation: checkPop 0.35s ease;
+        }
+
+        .checkBox:checked::after {
+            content: "✓";
+            position: absolute;
+            color: black;
+            font-size: 17px;
+            left: 3px;
+            top: -3px;
+        }
+
+        @keyframes checkPop {
+
+            0% {
+                transform: scale(0.6);
+            }
+
+            60% {
+                transform: scale(1.25);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+        .taskName {
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .taskPoints {
+            font-size: 10px;
+            letter-spacing: 2px;
+            opacity: 0.55;
+            white-space: nowrap;
+        }
+
+        /* ==================================================
+           XP POPUP
+        ================================================== */
+
+        .xpGain {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 1200;
+            pointer-events: none;
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 38px;
+            letter-spacing: 4px;
+            animation: xpPopup 0.9s ease forwards;
+        }
+
+        @keyframes xpPopup {
+
+            0% {
+                opacity: 0;
+                transform:
+                    translate(-50%,-50%)
+                    scale(0.5);
+            }
+
+            25% {
+                opacity: 1;
+                transform:
+                    translate(-50%,-65%)
+                    scale(1.2);
+            }
+
+            100% {
+                opacity: 0;
+                transform:
+                    translate(-50%,-120%)
+                    scale(1);
+            }
+
+        }
+
+        /* ==================================================
+           CURRENT TITLE
+        ================================================== */
+
+        #weeklyTitle {
+            text-align: center;
+            margin-top: 18px;
+            min-height: 35px;
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 25px;
+            letter-spacing: 4px;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.5);
+        }
+
+        #weeklyTitle.active {
+            animation: titleUnlock 1s ease;
+        }
+
+        @keyframes titleUnlock {
+
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        /* ==================================================
+           TITLE UNLOCK SCREEN
+        ================================================== */
+
+        #titleUnlockScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            z-index: 1500;
+            background: rgba(0,0,0,0.82);
+            pointer-events: none;
+        }
+
+        #titleUnlockScreen.active {
+            display: flex;
+            animation: unlockScreen 2.5s ease forwards;
+        }
+
+        .unlockSmall {
+            font-family:
+                "Special Elite",
+                monospace;
+            font-size: 12px;
+            letter-spacing: 5px;
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+
+        .unlockTitle {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: clamp(38px, 7vw, 70px);
+            letter-spacing: 6px;
+            text-shadow:
+                0 0 15px rgba(255,255,255,0.7);
+            animation: unlockTitle 2.5s ease;
+        }
+
+        @keyframes unlockScreen {
+
+            0% {
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+
+        }
+
+        @keyframes unlockTitle {
+
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            25% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+
+            45% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+        /* ==================================================
+           SPORTS SCREEN
+        ================================================== */
+
+        #sportsScreen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1400;
+            overflow-y: auto;
+            background: #000;
+        }
+
+        #sportsScreen.active {
+            display: flex;
+            animation: sportsAppear 0.8s ease;
+        }
+
+        .sportsBackground {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .sportsOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    rgba(0,0,0,0.05) 20%,
+                    rgba(0,0,0,0.55) 100%
+                );
+        }
+
+        .sportsContent {
+            position: relative;
+            z-index: 2;
+            width: min(1100px, 94vw);
+            min-height: 90vh;
+            padding: 30px 25px;
+            margin: 30px 0;
+        }
+
+        .sportsTitle {
+            text-align: center;
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: clamp(38px, 6vw, 65px);
+            letter-spacing: 7px;
+            opacity: 0.72;
+            text-shadow:
+                0 0 15px rgba(0,0,0,0.8);
+            margin-bottom: 25px;
+        }
+
+        .sportsPlan {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .sportCard {
+            padding: 20px;
+            min-height: 190px;
+            background: rgba(0,0,0,0.22);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(1px);
+            text-shadow:
+                0 0 7px rgba(0,0,0,0.9);
+            transition: 0.25s;
+        }
+
+        .sportCard:hover {
+            border-color: rgba(255,255,255,0.55);
+            background: rgba(0,0,0,0.28);
+        }
+
+        .sportCard.center {
+            grid-column: 1 / 3;
+            width: 52%;
+            justify-self: center;
+        }
+
+        .sportNumber {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 29px;
+            letter-spacing: 4px;
+            opacity: 0.68;
+            margin-bottom: 8px;
+        }
+
+        .sportName {
+            font-family:
+                "Creepster",
+                cursive;
+            font-size: 25px;
+            letter-spacing: 3px;
+            opacity: 0.68;
+            margin-bottom: 12px;
+        }
+
+        .sportInfo {
+            font-size: 12px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            opacity: 0.58;
+        }
+
+        .sportInfo strong {
+            opacity: 0.8;
+        }
+
+        .sportsBottom {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .sportsClose {
+            opacity: 0.65;
+        }
+
+        @keyframes sportsAppear {
+
+            from {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            .sportsContent {
+                padding: 20px 12px;
+            }
+
+            .sportsPlan {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .sportCard {
+                min-height: auto;
+                padding: 15px;
+            }
+
+            .sportCard.center {
+                grid-column: auto;
+                width: 100%;
+            }
+        .sportNumber {
+                font-size: 24px;
+            }
+
+            .sportName {
+                font-size: 21px;
+            }
+
+            .sportInfo {
+                font-size: 10px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .checklistContent {
+                padding: 15px;
+            }
+
+            .checklistTitle {
+                font-size: 34px;
+            }
+
+            .taskName {
+                font-size: 9px;
+            }
+
+            .taskPoints {
+                font-size: 8px;
+            }
+
+            .checkItem {
+                padding: 9px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ==================================================
+         REGISTER
+    ================================================== -->
+
+    <div id="registerScreen" class="formScreen">
+
+        <div class="formBox">
+
+            <div class="formTitle">
+                CREATE ACCOUNT
+            </div>
+
+            <div class="field">
+
+                <label>NICKNAME</label>
+
+                <input
+                    id="registerNickname"
+                    type="text"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>PASSWORD</label>
+
+                <input
+                    id="registerPassword"
+                    type="password"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>CONFIRM PASSWORD</label>
+
+                <input
+                    id="registerConfirmPassword"
+                    type="password"
+                >
+
+            </div>
+
+            <button id="createButton">
+                CREATE
+            </button>
+
+            <div
+                id="registerMessage"
+                class="formMessage"
+            ></div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================================================
+         LOGIN
+    ================================================== -->
+
+    <div id="loginScreen" class="formScreen">
+
+        <div class="formBox">
+
+            <div class="formTitle">
+                LOGIN
+            </div>
+
+            <div class="field">
+
+                <label>NICKNAME</label>
+
+                <input
+                    id="loginNickname"
+                    type="text"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>PASSWORD</label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                >
+
+            </div>
+
+            <button id="loginButton">
+                ENTER
+            </button>
+
+            <div
+                id="loginMessage"
+                class="formMessage"
+            ></div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================================================
+         INTRO
+    ================================================== -->
+
+    <div id="introScreen">
+
+        <div id="introText"></div>
+
+    </div>
+
+    <!-- ==================================================
+         MAIN SYSTEM
+    ================================================== -->
+
+    <div id="mainSystem">
+
+        <img
+            src="./hero-zero-two.png"
+            alt="Hero Zero Two"
+        >
+
+        <div id="darkOverlay"></div>
+
+        <!-- ==================================================
+             MOOD CHECK
+        ================================================== -->
+
+        <div id="moodCheck">
+
+            <div class="moodContent">
+
+                <div class="moodTitle">
+                    MOOD CHECK
+                </div>
+
+                <div
+                    id="moodCounter"
+                    class="moodCounter"
+                ></div>
+
+                <div
+                    id="question"
+                    class="question"
+                ></div>
+
+                <div
+                    id="answerArea"
+                    class="answerArea"
+                ></div>
+
+            </div>
+
+        </div>
+        <!-- ==================================================
+             MOOD COMPLETE
+        ================================================== -->
+
+        <div id="moodComplete">
+
+            <div class="completeTitle">
+                MOOD CHECK COMPLETE
+            </div>
+
+            <div class="completeText">
+                WELCOME TO THE SYSTEM
+            </div>
+
+        </div>
+
+        <div id="flashEffect"></div>
+
+    </div>
+
+    <!-- ==================================================
+         CHECKLIST SCREEN
+    ================================================== -->
+
+    <div id="checklistScreen">
+
+        <img
+            src="./checklist-bg.png"
+            class="checklistBackground"
+            alt="Checklist Background"
+        >
+
+        <div class="checklistDarkOverlay"></div>
+
+        <div class="checklistContent">
+
+            <div class="checklistTitle">
+                DAILY CHECKLIST
+            </div>
+
+            <div
+                id="checklistDate"
+                class="checklistDate"
+            ></div>
+
+            <div
+                id="streakText"
+                class="streakText"
+            >
+                STREAK: 0 DAYS
+            </div>
+
+            <div class="progressInfo">
+
+                <span>
+                    PROGRESS
+                </span>
+
+                <span id="progressPercent">
+                    0%
+                </span>
+
+            </div>
+
+            <div class="progressBar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+            <div id="scoreText">
+                0 / 100 XP
+            </div>
+
+            <div id="checklist"></div>
+
+            <div id="weeklyTitle"></div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================================================
+         SPORTS SCREEN
+    ================================================== -->
+
+    <div id="sportsScreen">
+
+        <img
+            src="./hachiman-yukino.jpg"
+            class="sportsBackground"
+            alt="Hachiman Yukino"
+        >
+
+        <div class="sportsOverlay"></div>
+
+        <div class="sportsContent">
+
+            <div class="sportsTitle">
+                🏋️‍♂️ ПЛАН ТРЕНИРОВКИ
+            </div>
+
+            <div class="sportsPlan">
+
+                <!-- 1 -->
+
+                <div class="sportCard">
+
+                    <div class="sportNumber">
+                        1.
+                    </div>
+
+                    <div class="sportName">
+                        🟢 РАЗМИНКА
+                    </div>
+
+                    <div class="sportInfo">
+
+                        ⏱️ 7 минут<br>
+
+                        🚶 Быстрая ходьба — 2 мин<br>
+
+                        ⭕ Обруч — 2 мин<br>
+
+                        🪢 Скакалка — 1 мин<br>
+
+                        🔄 Круги руками — 30 сек<br>
+
+                        🦵 Приседания — 15<br>
+
+                        🏃 Выпады назад — 8/нога<br><br>
+
+                        Отдых: по необходимости.
+
+                    </div>
+
+                </div>
+
+                <!-- 2 -->
+
+                <div class="sportCard">
+
+                    <div class="sportNumber">
+                        2.
+                    </div>
+
+                    <div class="sportName">
+                        🔴 СИЛА
+                    </div>
+
+                    <div class="sportInfo">
+
+                        🔄 3 круга<br>
+
+                        🦵 Приседания — 15<br>
+
+                        💪 Отжимания — 10–15<br>
+
+                        🏋️ Жим гантелей вверх — 12<br>
+
+                        💪 Тяга резинки — 15<br>
+
+                        🦵 Ягодичный мостик — 15<br>
+
+                        🧱 Планка — 40 сек<br><br>
+
+                        ⏸️ Между упражнениями: 30–60 сек<br>
+
+                        ⏸️ Между кругами: 2 мин
+
+                    </div>
+
+                </div>
+
+                <!-- 3 -->
+
+                <div class="sportCard center">
+
+                    <div class="sportNumber">
+                        3.
+                    </div>
+                    <div class="sportName">
+                        🟠 КАРДИО
+                    </div>
+
+                    <div class="sportInfo">
+
+                        ⏱️ 12 минут<br>
+
+                        🪢 Скакалка — 30 сек прыжки → 30 сек отдых × 6<br>
+
+                        ⭕ Обруч — 3 минуты в спокойном/среднем темпе.
+
+                    </div>
+
+                </div>
+
+                <!-- 4 -->
+
+                <div class="sportCard">
+
+                    <div class="sportNumber">
+                        4.
+                    </div>
+
+                    <div class="sportName">
+                        🔵 КООРДИНАЦИЯ
+                    </div>
+
+                    <div class="sportInfo">
+
+                        🥊 Груша — 6 минут<br>
+
+                        30 сек работа → 30 сек отдых × 6<br><br>
+
+                        Работай контролируемо,<br>
+                        не бей изо всей силы.
+
+                    </div>
+
+                </div>
+
+                <!-- 5 -->
+
+                <div class="sportCard">
+
+                    <div class="sportNumber">
+                        5.
+                    </div>
+
+                    <div class="sportName">
+                        🟣 ФИНИШ
+                    </div>
+
+                    <div class="sportInfo">
+
+                        ⏱️ 10 минут<br><br>
+
+                        Выбери ОДНО:<br><br>
+
+                        🏃 Беговая дорожка — 10 мин<br>
+
+                        или<br>
+
+                        🚴 Велотренажёр — 10 мин<br><br>
+
+                        Темп такой, чтобы ты мог продолжать
+                        без ощущения полного истощения.
+
+                    </div>
+
+                </div>
+
+                <!-- 6 -->
+
+                <div class="sportCard center">
+
+                    <div class="sportNumber">
+                        6.
+                    </div>
+
+                    <div class="sportName">
+                        ⚪ ЗАМИНКА
+                    </div>
+
+                    <div class="sportInfo">
+
+                        ⏱️ 5 минут<br>
+
+                        🚶 Спокойная ходьба<br>
+
+                        🦵 Лёгкая растяжка ног<br>
+
+                        💪 Растяжка рук/плеч<br>
+
+                        🧘 Спокойно восстановить дыхание
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sportsBottom">
+
+                <button
+                    class="sportsClose"
+                    onclick="closeSports()"
+                >
+                    ← НАЗАД
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================================================
+         TITLE UNLOCK
+    ================================================== -->
+
+    <div id="titleUnlockScreen">
+
+        <div class="unlockSmall">
+            NEW TITLE UNLOCKED
+        </div>
+
+        <div
+            id="unlockTitle"
+            class="unlockTitle"
+        ></div>
+
+    </div>
+
+    <script>
+
+        /* ==================================================
+           ACCOUNT
+        ================================================== */
+
+        const ACCOUNT_KEY =
+            "lifeSystemAccount";
+
+        function showScreen(id) {
+
+            document
+                .querySelectorAll(".formScreen")
+                .forEach(screen => {
+
+                    screen.classList
+                        .remove("active");
+
+                });
+
+            document
+                .getElementById(id)
+                .classList
+                .add("active");
+
+        }
+
+        const savedAccount =
+            localStorage.getItem(
+                ACCOUNT_KEY
+            );
+
+        if (savedAccount) {
+
+            showScreen(
+                "loginScreen"
+            );
+
+        } else {
+
+            showScreen(
+                "registerScreen"
+            );
+
+        }
+
+        /* ==================================================
+           CREATE ACCOUNT
+        ================================================== */
+        document
+            .getElementById("createButton")
+            .addEventListener(
+                "click",
+                createAccount
+            );
+
+        function createAccount() {
+
+            const nickname =
+                document
+                    .getElementById(
+                        "registerNickname"
+                    )
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById(
+                        "registerPassword"
+                    )
+                    .value;
+
+            const confirm =
+                document
+                    .getElementById(
+                        "registerConfirmPassword"
+                    )
+                    .value;
+
+            const message =
+                document
+                    .getElementById(
+                        "registerMessage"
+                    );
+
+            if (
+                nickname === "" ||
+                password === "" ||
+                confirm === ""
+            ) {
+
+                message.textContent =
+                    "ENTER ALL DATA";
+
+                return;
+
+            }
+
+            if (
+                password !== confirm
+            ) {
+
+                message.textContent =
+                    "PASSWORDS DO NOT MATCH";
+
+                return;
+
+            }
+
+            const account = {
+
+                nickname:
+                    nickname,
+
+                password:
+                    password,
+
+                level:
+                    1,
+
+                xp:
+                    0,
+
+                created:
+                    new Date()
+                        .toISOString()
+
+            };
+
+            localStorage.setItem(
+                ACCOUNT_KEY,
+                JSON.stringify(account)
+            );
+
+            message.textContent =
+                "ACCOUNT CREATED";
+
+            setTimeout(
+                startSystem,
+                1000
+            );
+
+        }
+
+        /* ==================================================
+           LOGIN
+        ================================================== */
+
+        document
+            .getElementById("loginButton")
+            .addEventListener(
+                "click",
+                login
+            );
+
+        function login() {
+
+            const nickname =
+                document
+                    .getElementById(
+                        "loginNickname"
+                    )
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
+
+            const message =
+                document
+                    .getElementById(
+                        "loginMessage"
+                    );
+
+            if (
+                nickname === "" ||
+                password === ""
+            ) {
+
+                message.textContent =
+                    "ENTER ALL DATA";
+
+                return;
+
+            }
+
+            const saved =
+                localStorage.getItem(
+                    ACCOUNT_KEY
+                );
+
+            if (!saved) {
+
+                message.textContent =
+                    "ACCOUNT NOT FOUND";
+
+                return;
+
+            }
+
+            const account =
+                JSON.parse(saved);
+
+            if (
+                nickname.toLowerCase() !==
+                    account.nickname.toLowerCase()
+                ||
+                password !==
+                    account.password
+            ) {
+
+                message.textContent =
+                    "INVALID DATA";
+
+                return;
+
+            }
+
+            message.textContent =
+                "LOGIN SUCCESSFUL";
+
+            setTimeout(
+                startSystem,
+                1000
+            );
+
+        }
+
+        /* ==================================================
+           SYSTEM INTRO
+        ================================================== */
+        function startSystem() {
+
+            document
+                .querySelectorAll(".formScreen")
+                .forEach(screen => {
+
+                    screen.classList
+                        .remove("active");
+
+                });
+
+            const intro =
+                document.getElementById(
+                    "introScreen"
+                );
+
+            const introText =
+                document.getElementById(
+                    "introText"
+                );
+
+            intro.classList.add(
+                "active"
+            );
+
+            const phases = [
+
+                "SYSTEM",
+
+                "PASSWORD",
+
+                "ENTER"
+
+            ];
+
+            let index = 0;
+
+            function showPhase() {
+
+                introText.classList
+                    .remove("show");
+
+                setTimeout(
+                    () => {
+
+                        introText.textContent =
+                            phases[index];
+
+                        introText.style
+                            .transform =
+                            "translateY(0)";
+
+                        introText.classList
+                            .add("show");
+
+                    },
+                    300
+                );
+
+            }
+
+            showPhase();
+
+            const timer =
+                setInterval(
+                    () => {
+
+                        introText.classList
+                            .remove("show");
+
+                        setTimeout(
+                            () => {
+
+                                index++;
+
+                                if (
+                                    index >=
+                                    phases.length
+                                ) {
+
+                                    clearInterval(
+                                        timer
+                                    );
+
+                                    intro.classList
+                                        .remove(
+                                            "active"
+                                        );
+
+                                    document
+                                        .getElementById(
+                                            "mainSystem"
+                                        )
+                                        .classList
+                                        .add(
+                                            "active"
+                                        );
+
+                                    startMoodCheck();
+
+                                    return;
+
+                                }
+
+                                showPhase();
+
+                            },
+                            500
+                        );
+
+                    },
+                    1900
+                );
+
+        }
+
+        /* ==================================================
+           MOOD QUESTIONS
+        ================================================== */
+
+        const questions = [
+
+            {
+
+                text:
+                    "Какое у тебя сейчас настроение?",
+
+                type:
+                    "buttons",
+
+                answers: [
+
+                    "😄 ОТЛИЧНОЕ",
+
+                    "🙂 НОРМАЛЬНОЕ",
+
+                    "😐 ТАК СЕБЕ",
+
+                    "😔 ПЛОХОЕ"
+
+                ]
+
+            },
+
+            {
+
+                text:
+                    "Что сегодня заставило тебя улыбнуться?",
+
+                type:
+                    "text"
+
+            },
+
+            {
+
+                text:
+                    "Есть ли сегодня что-то, чего ты ждёшь с нетерпением?",
+
+                type:
+                    "buttons",
+
+                answers: [
+
+                    "ДА",
+
+                    "НЕТ"
+
+                ]
+
+            },
+
+            {
+
+                text:
+                    "Какой момент сегодня был самым приятным?",
+
+                type:
+                    "text"
+
+            },
+
+            {
+            text:
+                    "Если бы ты мог прямо сейчас оказаться где угодно — куда бы ты отправился?",
+
+                type:
+                    "text"
+
+            },
+
+            {
+
+                text:
+                    "Готов оставить плохое настроение за дверью?",
+
+                type:
+                    "buttons",
+
+                answers: [
+
+                    "ДА 😎",
+
+                    "КОНЕЧНО 😎"
+
+                ]
+
+            }
+
+        ];
+
+        let currentQuestion = 0;
+
+        function startMoodCheck() {
+
+            currentQuestion = 0;
+
+            document
+                .getElementById(
+                    "moodCheck"
+                )
+                .classList
+                .add("active");
+
+            showQuestion();
+
+        }
+
+        function showQuestion() {
+
+            const question =
+                questions[
+                    currentQuestion
+                ];
+
+            const questionElement =
+                document.getElementById(
+                    "question"
+                );
+
+            const counter =
+                document.getElementById(
+                    "moodCounter"
+                );
+
+            const answerArea =
+                document.getElementById(
+                    "answerArea"
+                );
+
+            counter.textContent =
+                "QUESTION " +
+                (currentQuestion + 1) +
+                " / " +
+                questions.length;
+
+            questionElement.classList
+                .remove("glitch");
+
+            void questionElement.offsetWidth;
+
+            questionElement.textContent =
+                question.text;
+
+            questionElement.classList
+                .add("glitch");
+
+            answerArea.innerHTML = "";
+
+            if (
+                question.type ===
+                "buttons"
+            ) {
+
+                question.answers
+                    .forEach(answer => {
+
+                        const button =
+                            document
+                                .createElement(
+                                    "button"
+                                );
+
+                        button.className =
+                            "answerButton";
+
+                        button.textContent =
+                            answer;
+
+                        button.onclick =
+                            nextMoodQuestion;
+
+                        answerArea
+                            .appendChild(
+                                button
+                            );
+
+                    });
+
+            }
+
+            if (
+                question.type ===
+                "text"
+            ) {
+
+                const input =
+                    document
+                        .createElement(
+                            "input"
+                        );
+
+                input.className =
+                    "textAnswer";
+
+                input.placeholder =
+                    "WRITE YOUR ANSWER";
+
+                answerArea
+                    .appendChild(
+                        input
+                    );
+
+                const button =
+                    document
+                        .createElement(
+                            "button"
+                        );
+
+                button.className =
+                    "continueButton";
+
+                button.textContent =
+                    "CONTINUE";
+
+                button.onclick =
+                    () => {
+
+                        if (
+                            input.value
+                                .trim() === ""
+                        ) {
+
+                            input.focus();
+
+                            return;
+
+                        }
+
+                        nextMoodQuestion();
+
+                    };
+
+                answerArea
+                    .appendChild(
+                        button
+                    );
+
+            }
+
+        }
+
+        function nextMoodQuestion() {
+
+            playImpact();
+
+            setTimeout(
+                () => {
+                currentQuestion++;
+
+                    if (
+                        currentQuestion >=
+                        questions.length
+                    ) {
+
+                        finishMoodCheck();
+
+                        return;
+
+                    }
+
+                    showQuestion();
+
+                },
+                500
+            );
+
+        }
+
+        /* ==================================================
+           IMPACT
+        ================================================== */
+
+        function playImpact() {
+
+            const main =
+                document.getElementById(
+                    "mainSystem"
+                );
+
+            const flash =
+                document.getElementById(
+                    "flashEffect"
+                );
+
+            main.classList
+                .remove("shake");
+
+            void main.offsetWidth;
+
+            main.classList
+                .add("shake");
+
+            flash.classList
+                .remove("active");
+
+            void flash.offsetWidth;
+
+            flash.classList
+                .add("active");
+
+        }
+
+        /* ==================================================
+           MOOD COMPLETE
+        ================================================== */
+
+        function finishMoodCheck() {
+
+            document
+                .getElementById(
+                    "moodCheck"
+                )
+                .classList
+                .remove("active");
+
+            document
+                .getElementById(
+                    "moodComplete"
+                )
+                .classList
+                .add("active");
+
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById(
+                            "moodComplete"
+                        )
+                        .classList
+                        .remove("active");
+
+                    document
+                        .getElementById(
+                            "mainSystem"
+                        )
+                        .classList
+                        .remove("active");
+
+                    startChecklist();
+
+                },
+                3000
+            );
+
+        }
+
+        /* ==================================================
+           CHECKLIST DATA
+        ================================================== */
+
+        const checklistTasks = [
+
+            {
+                name:
+                    "🌅 ВСТАВАТЬ В 5:00 УТРА",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🏃 СДЕЛАТЬ СПОРТ",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🧼 ГИГИЕНА",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "📚 ХОРОШО УЧИТЬСЯ В ТЕЧЕНИЕ ДНЯ",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🍽️ ПРИЙТИ ПОКУШАТЬ УЖИН",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🚶 СПОРТ (ЛЁГКИЙ)",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "📝 ДОМАШКА И ДОПЫ",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🎮 НЕ ЗАБЫВАТЬ ИГРАТЬ В ИГРЫ",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🍿 СМОТРЕТЬ АНИМЕ 😂",
+                points:
+                    10
+            },
+
+            {
+                name:
+                    "🛌 ЛЕЧЬ СПАТЬ НЕ ПОЗДНЕЕ 23:00 + 🧼 ГИГИЕНА",
+                points:
+                    10
+            }
+
+        ];
+
+        /* ==================================================
+           MOTIVATIONAL PHRASES
+        ================================================== */
+
+        const motivationalPhrases = [
+        "ОТЛИЧНАЯ РАБОТА!",
+
+            "ТЫ СПРАВИЛСЯ!",
+
+            "ТАК ДЕРЖАТЬ!",
+
+            "ЕЩЁ ОДИН ШАГ ВПЕРЁД!",
+
+            "СИСТЕМА ОТМЕТИЛА ТЕБЯ!",
+
+            "ТЫ СТАНОВИШЬСЯ СИЛЬНЕЕ!",
+
+            "ПРОГРЕСС ЗАСЧИТАН!",
+
+            "НЕ ОСТАНАВЛИВАЙСЯ!",
+
+            "ВОТ ЭТО ДИСЦИПЛИНА!",
+
+            "ДЕНЬ СТАЛ ЛУЧШЕ!"
+
+        ];
+
+        /* ==================================================
+           TITLES
+        ================================================== */
+
+        const titles = [
+
+            {
+                days: 7,
+                name:
+                    "👁️ ПРОБУЖДЕНИЕ ГЛАЗ"
+            },
+
+            {
+                days: 14,
+                name:
+                    "👑 ИЗБРАННЫЙ"
+            },
+
+            {
+                days: 21,
+                name:
+                    "🔥 НЕСОКРУШИМЫЙ"
+            },
+
+            {
+                days: 28,
+                name:
+                    "⚔️ МАСТЕР ДИСЦИПЛИНЫ"
+            },
+
+            {
+                days: 35,
+                name:
+                    "🌌 ВЛАДЫКА ВОЛИ"
+            },
+
+            {
+                days: 42,
+                name:
+                    "☄️ РАЗРУШИТЕЛЬ СУДЬБЫ"
+            },
+
+            {
+                days: 49,
+                name:
+                    "🐉 ВЛАДЫКА ДРАКОНОВ"
+            },
+
+            {
+                days: 56,
+                name:
+                    "🩶 АБСОЛЮТНЫЙ"
+            },
+
+            {
+                days: 63,
+                name:
+                    "👑 ПОВЕЛИТЕЛЬ СИСТЕМЫ"
+            }
+
+        ];
+
+        function getTitleForDays(days) {
+
+            if (
+                days < 7 ||
+                days % 7 !== 0
+            ) {
+
+                return null;
+
+            }
+
+            const existing =
+                titles.find(
+                    title =>
+                        title.days === days
+                );
+
+            if (existing) {
+
+                return existing;
+
+            }
+
+            const level =
+                Math.floor(
+                    days / 7
+                );
+
+            return {
+
+                days:
+                    days,
+
+                name:
+                    "★ СИСТЕМНЫЙ УРОВЕНЬ " +
+                    level +
+                    " ★"
+
+            };
+
+        }
+
+        /* ==================================================
+           CHECKLIST STORAGE
+        ================================================== */
+
+        const CHECKLIST_KEY =
+            "systemChecklist";
+
+        let checklistData =
+            JSON.parse(
+                localStorage.getItem(
+                    CHECKLIST_KEY
+                )
+            ) || {
+
+                date:
+                    "",
+
+                checked:
+                    [],
+
+                streak:
+                    0,
+
+                lastPerfectDate:
+                    "",
+
+                unlockedTitles:
+                    []
+
+            };
+
+        /* ==================================================
+           DATE HELPERS
+        ================================================== */
+
+        function getDateString(
+            date = new Date()
+        ) {
+
+            const year =
+                date.getFullYear();
+
+            const month =
+                String(
+                    date.getMonth() + 1
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+            const day =
+                String(
+                    date.getDate()
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+            return (
+                year +
+                "-" +
+                month +
+                "-" +
+                day
+            );
+
+        }
+
+        function getPreviousDate(
+            dateString
+        ) {
+
+            const date =
+                new Date(
+                    dateString +
+                    "T12:00:00"
+                );
+                date.setDate(
+                date.getDate() - 1
+            );
+
+            return getDateString(
+                date
+            );
+
+        }
+
+        /* ==================================================
+           PREPARE CHECKLIST
+        ================================================== */
+
+        function prepareChecklist() {
+
+            const today =
+                getDateString();
+
+            if (
+                checklistData.date === ""
+            ) {
+
+                checklistData.date =
+                    today;
+
+                checklistData.checked =
+                    [];
+
+            }
+
+            if (
+                checklistData.date !==
+                today
+            ) {
+
+                const previousDate =
+                    getPreviousDate(
+                        today
+                    );
+
+                if (
+                    checklistData.lastPerfectDate !==
+                    previousDate
+                ) {
+
+                    checklistData.streak =
+                        0;
+
+                }
+
+                checklistData.date =
+                    today;
+
+                checklistData.checked =
+                    [];
+
+            }
+
+            if (
+                !Array.isArray(
+                    checklistData.checked
+                )
+            ) {
+
+                checklistData.checked =
+                    [];
+
+            }
+
+            if (
+                !Array.isArray(
+                    checklistData.unlockedTitles
+                )
+            ) {
+
+                checklistData.unlockedTitles =
+                    [];
+
+            }
+
+            saveChecklist();
+
+        }
+
+        /* ==================================================
+           START CHECKLIST
+        ================================================== */
+
+        function startChecklist() {
+
+            prepareChecklist();
+
+            document
+                .getElementById(
+                    "checklistScreen"
+                )
+                .classList
+                .add("active");
+
+            document
+                .getElementById(
+                    "checklistDate"
+                )
+                .textContent =
+                    "DATE: " +
+                    checklistData.date;
+
+            renderChecklist();
+
+        }
+
+        /* ==================================================
+           RENDER CHECKLIST
+        ================================================== */
+
+        function renderChecklist() {
+
+            const container =
+                document.getElementById(
+                    "checklist"
+                );
+
+            container.innerHTML = "";
+
+            checklistTasks
+                .forEach(
+                    (task, index) => {
+
+                        const item =
+                            document
+                                .createElement(
+                                    "div"
+                                );
+
+                        item.className =
+                            "checkItem";
+
+                        const left =
+                            document
+                                .createElement(
+                                    "div"
+                                );
+
+                        left.className =
+                            "checkLeft";
+
+                        const checkbox =
+                            document
+                                .createElement(
+                                    "input"
+                                );
+
+                        checkbox.type =
+                            "checkbox";
+
+                        checkbox.className =
+                            "checkBox";
+
+                        checkbox.checked =
+                            checklistData
+                                .checked
+                                .includes(
+                                    index
+                                );
+
+                        checkbox.onchange =
+                            () => {
+                            toggleTask(
+                                    index,
+                                    checkbox.checked
+                                );
+
+                            };
+
+                        const name =
+                            document
+                                .createElement(
+                                    "span"
+                                );
+
+                        name.className =
+                            "taskName";
+
+                        name.textContent =
+                            task.name;
+
+                        const points =
+                            document
+                                .createElement(
+                                    "span"
+                                );
+
+                        points.className =
+                            "taskPoints";
+
+                        points.textContent =
+                            "+" +
+                            task.points +
+                            " XP";
+
+                        left.appendChild(
+                            checkbox
+                        );
+
+                        left.appendChild(
+                            name
+                        );
+
+                        item.appendChild(
+                            left
+                        );
+
+                        item.appendChild(
+                            points
+                        );
+
+                        container.appendChild(
+                            item
+                        );
+
+                    }
+                );
+
+            updateProgress();
+
+            updateStreakDisplay();
+
+            checkCurrentTitle();
+
+        }
+
+        /* ==================================================
+           TOGGLE TASK
+        ================================================== */
+
+        function toggleTask(
+            index,
+            checked
+        ) {
+
+            if (checked) {
+
+                if (
+                    !checklistData
+                        .checked
+                        .includes(index)
+                ) {
+
+                    checklistData
+                        .checked
+                        .push(index);
+
+                    const phrase =
+                        motivationalPhrases[
+                            Math.floor(
+                                Math.random() *
+                                motivationalPhrases.length
+                            )
+                        ];
+
+                    showXPGain(
+                        checklistTasks[index].points,
+                        phrase
+                    );
+
+                }
+
+            } else {
+
+                const position =
+                    checklistData
+                        .checked
+                        .indexOf(index);
+
+                if (
+                    position !== -1
+                ) {
+
+                    checklistData
+                        .checked
+                        .splice(
+                            position,
+                            1
+                        );
+
+                }
+
+            }
+
+            saveChecklist();
+
+            updateProgress();
+
+            if (
+                checklistData
+                    .checked
+                    .length ===
+                checklistTasks.length
+            ) {
+
+                completePerfectDay();
+
+            }
+
+        }
+
+        /* ==================================================
+           COMPLETE PERFECT DAY
+        ================================================== */
+
+        function completePerfectDay() {
+
+            const today =
+                getDateString();
+
+            if (
+                checklistData.lastPerfectDate ===
+                today
+            ) {
+
+                updateStreakDisplay();
+
+                return;
+
+            }
+
+            const yesterday =
+                getPreviousDate(
+                    today
+                );
+
+            if (
+                checklistData.lastPerfectDate ===
+                yesterday
+            ) {
+            checklistData.streak++;
+
+            } else {
+
+                checklistData.streak =
+                    1;
+
+            }
+
+            checklistData.lastPerfectDate =
+                today;
+
+            saveChecklist();
+
+            updateStreakDisplay();
+
+            checkForNewTitles();
+
+        }
+
+        /* ==================================================
+           PROGRESS
+        ================================================== */
+
+        function updateProgress() {
+
+            let score = 0;
+
+            checklistData
+                .checked
+                .forEach(index => {
+
+                    if (
+                        checklistTasks[index]
+                    ) {
+
+                        score +=
+                            checklistTasks[index]
+                                .points;
+
+                    }
+
+                });
+
+            const percent =
+                Math.min(
+                    score,
+                    100
+                );
+
+            document
+                .getElementById(
+                    "progressFill"
+                )
+                .style.width =
+                    percent + "%";
+
+            document
+                .getElementById(
+                    "progressPercent"
+                )
+                .textContent =
+                    percent + "%";
+
+            document
+                .getElementById(
+                    "scoreText"
+                )
+                .textContent =
+                    score +
+                    " / 100 XP";
+
+        }
+
+        /* ==================================================
+           STREAK
+        ================================================== */
+
+        function updateStreakDisplay() {
+
+            document
+                .getElementById(
+                    "streakText"
+                )
+                .textContent =
+                    "STREAK: " +
+                    checklistData.streak +
+                    " DAYS";
+
+        }
+
+        /* ==================================================
+           XP EFFECT
+        ================================================== */
+
+        function showXPGain(
+            points,
+            phrase
+        ) {
+
+            const popup =
+                document.createElement(
+                    "div"
+                );
+
+            popup.className =
+                "xpGain";
+
+            popup.innerHTML =
+                "+" +
+                points +
+                " XP<br>" +
+                '<span style="font-size:16px;letter-spacing:2px;">' +
+                phrase +
+                "</span>";
+
+            document
+                .getElementById(
+                    "checklistScreen"
+                )
+                .appendChild(
+                    popup
+                );
+
+            setTimeout(
+                () => {
+
+                    popup.remove();
+
+                },
+                1200
+            );
+
+        }
+
+        /* ==================================================
+           CURRENT TITLE
+        ================================================== */
+
+        function getCurrentTitle() {
+
+            const completedDays =
+                checklistData.streak;
+
+            if (
+                completedDays < 7 ||
+                completedDays % 7 !== 0
+            ) {
+
+                return null;
+
+            }
+
+            return getTitleForDays(
+                completedDays
+            );
+
+        }
+
+        function checkCurrentTitle() {
+
+            const titleElement =
+                document.getElementById(
+                    "weeklyTitle"
+                );
+
+            const days =
+                checklistData.streak;
+
+            if (
+                days < 7
+            ) {
+
+                titleElement.textContent =
+                    "";
+
+                return;
+
+            }
+
+            const milestone =
+                Math.floor(
+                    days / 7
+                ) * 7;
+                const currentTitle =
+                getTitleForDays(
+                    milestone
+                );
+
+            if (
+                currentTitle
+            ) {
+
+                titleElement.textContent =
+                    "★ " +
+                    currentTitle.name +
+                    " ★";
+
+            } else {
+
+                titleElement.textContent =
+                    "";
+
+            }
+
+        }
+
+        /* ==================================================
+           NEW TITLE UNLOCK
+        ================================================== */
+
+        function checkForNewTitles() {
+
+            const days =
+                checklistData.streak;
+
+            if (
+                days < 7 ||
+                days % 7 !== 0
+            ) {
+
+                checkCurrentTitle();
+
+                return;
+
+            }
+
+            const title =
+                getTitleForDays(
+                    days
+                );
+
+            if (
+                title &&
+                !checklistData
+                    .unlockedTitles
+                    .includes(days)
+            ) {
+
+                checklistData
+                    .unlockedTitles
+                    .push(days);
+
+                saveChecklist();
+
+                showTitleUnlock(
+                    title.name
+                );
+
+            }
+
+            checkCurrentTitle();
+
+        }
+
+        function showTitleUnlock(
+            titleName
+        ) {
+
+            const screen =
+                document.getElementById(
+                    "titleUnlockScreen"
+                );
+
+            const title =
+                document.getElementById(
+                    "unlockTitle"
+                );
+
+            title.textContent =
+                titleName;
+
+            screen.classList
+                .remove("active");
+
+            void screen.offsetWidth;
+
+            screen.classList
+                .add("active");
+
+            setTimeout(
+                () => {
+
+                    screen.classList
+                        .remove("active");
+
+                },
+                2600
+            );
+
+        }
+
+        /* ==================================================
+           SPORTS
+        ================================================== */
+
+        function openSports() {
+
+            document
+                .getElementById(
+                    "checklistScreen"
+                )
+                .classList
+                .remove("active");
+
+            document
+                .getElementById(
+                    "sportsScreen"
+                )
+                .classList
+                .add("active");
+
+        }
+
+        function closeSports() {
+
+            document
+                .getElementById(
+                    "sportsScreen"
+                )
+                .classList
+                .remove("active");
+
+            document
+                .getElementById(
+                    "checklistScreen"
+                )
+                .classList
+                .add("active");
+
+        }
+
+        /* ==================================================
+           CONNECT SPORT TASK
+        ================================================== */
+
+        document.addEventListener(
+            "change",
+            function(event) {
+
+                if (
+                    event.target.classList.contains(
+                        "checkBox"
+                    )
+                ) {
+
+                    const items =
+                        document.querySelectorAll(
+                            ".checkBox"
+                        );
+
+                    if (
+                        items[1] ===
+                        event.target
+                    ) {
+
+                        if (
+                            event.target.checked
+                        ) {
+
+                            openSports();
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+        /* ==================================================
+           SAVE
+        ================================================== */
+
+        function saveChecklist() {
+
+            localStorage.setItem(
+
+                CHECKLIST_KEY,
+
+                JSON.stringify(
+                    checklistData
+                )
+
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bog'lanish — Yulduzlar Yo'li</title>
+</head>
+<body>
+
+
+    <nav>
+        <p>
+            <a href="index.html">Bosh sahifa</a> | 
+            <a href="missions.html">Barcha missiyalar</a> | 
+            <a href="astronauts.html">Astronavtlar</a> | 
+            <a href="contact.html">Bog'lanish</a>
+        </p>
+    </nav>
+    <hr>
+
+    <!-- 1. Sarlavha -->
+    <h1>Missiyaga qo'shiling yoki savol bering</h1>
+
+    <!-- 2. Forma (select, textarea) -->
+    <section>
+        <h2>Aloqa formasi</h2>
+        <form action="#" method="post">
+            <p>
+                <label for="name">Ism:</label><br>
+                <input type="text" id="name" name="name" required>
+            </p>
+            <p>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required>
+            </p>
+            <p>
+                <label for="purpose">Murojaat turi:</label><br>
+                <select id="purpose" name="purpose">
+                    <option value="hamkorlik">Hamkorlik</option>
+                    <option value="sayyohlik">Sayyohlik</option>
+                    <option value="savol">Savol</option>
+                </select>
+            </p>
+            <p>
+                <label for="message">Qisqa xabar:</label><br>
+                <textarea id="message" name="message" rows="5" cols="40" required></textarea>
+            </p>
+            <p>
+                <button type="submit">Yuborish</button>
+            </p>
+        </form>
+    </section>
+
+    <hr>
+
+    <!-- 3. address -->
+    <section>
+        <h2>Bizning manzil</h2>
+        <address>
+            <strong>Kosmik Missiyalar Markazi "Yulduzlar Yo'li"</strong><br>
+            Kosmonavtlar ko'chasi, 42-bino<br>
+            Toshkent, O'zbekiston<br>
+            Tel: +998 (71) 123-45-67<br>
+            Email: <a href="mailto:info@yulduzlaryoli.uz">info@yulduzlaryoli.uz</a>
+        </address>
+    </section>
+
+    <hr>
+
+    
+</body>
+</html>
