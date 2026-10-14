@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Последние годы — Джалолиддин Мангуберди</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #17130e;
+            color: #e8d5ad;
+            font-family: 'PT Serif', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 50% 20%, #59412644, transparent 60%),
+                linear-gradient(90deg, #0d0b08, transparent 20%, transparent 80%, #0d0b08);
+        }
+
+        .progress-track {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #403020;
+            z-index: 10;
+        }
+
+        .progress-fill {
+            width: 71.43%;
+            height: 100%;
+            background: #cba45b;
+            box-shadow: 0 0 14px #cba45b;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 7%;
+            border-bottom: 1px solid #b18b4a55;
+        }
+
+       
+
+        .page-number {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #ad9874;
+        }
+
+        main {
+            width: min(1100px, 86%);
+            margin: auto;
+            padding: 65px 0 100px;
+        }
+
+        .eyebrow {
+            color: #c9a25e;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(38px, 6vw, 70px);
+            line-height: 1.15;
+            color: #f0dfbd;
+            max-width: 850px;
+        }
+
+        .intro {
+            max-width: 740px;
+            color: #c5b497;
+            line-height: 1.9;
+            font-size: 17px;
+            margin-top: 24px;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 38px 0;
+            color: #c6a05d;
+        }
+
+        .ornament::before,
+        .ornament::after {
+            content: "";
+            height: 1px;
+            background: #b18b4a66;
+            flex: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                #c9a25e,
+                #c9a25e,
+                transparent
+            );
+        }
+
+        .event {
+            width: 50%;
+            padding: 0 45px 55px 0;
+            position: relative;
+        }
+
+        .event:nth-child(even) {
+            margin-left: 50%;
+            padding: 0 0 55px 45px;
+        }
+
+        .event::after {
+            content: "";
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #d6b46d;
+            border: 3px solid #302519;
+            box-shadow: 0 0 12px #d6b46d88;
+            right: -7px;
+            top: 8px;
+        }
+
+        .event:nth-child(even)::after {
+            right: auto;
+            left: -7px;
+        }
+
+        .event-card {
+            border: 1px solid #b18b4a66;
+            background: linear-gradient(135deg, #302519, #1d1811);
+            padding: 28px;
+            box-shadow: 0 15px 35px #0004;
+        }
+
+        .year {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #d4ad65;
+            margin-bottom: 13px;
+        }
+
+        h2 {
+            font-size: clamp(20px, 2.5vw, 27px);
+            color: #f0dfbd;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .event-card p {
+            color: #c4b398;
+            line-height: 1.85;
+            font-size: 15px;
+        }
+
+        .event-symbol {
+            font-family: 'Cinzel', serif;
+            color: #c9a25e;
+            font-size: 34px;
+            margin-bottom: 15px;
+            opacity: .85;
+        }
+
+        .history-note {
+            margin-top: 20px;
+            border-left: 2px solid #c9a25e;
+            padding: 20px 25px;
+            background: #c9a25e0b;
+            color: #d7c29e;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .closing {
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid #b18b4a66;
+            border-bottom: 1px solid #b18b4a66;
+            padding: 40px 20px;
+        }
+
+        .closing h2 {
+            font-size: clamp(23px, 3vw, 34px);
+        }
+
+        .closing p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: #c4b398;
+            line-height: 1.9;
+        }
+
+        footer {
+            border-top: 1px solid #b18b4a55;
+            padding: 25px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #d9b56d;
+            text-decoration: none;
+            border: 1px solid #b18b4a77;
+            padding: 12px 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            transition: .25s;
+        }
+
+        .nav-link:hover {
+            background: #c9a25e;
+            color: #17130e;
+        }
+
+        .footer-center {
+            color: #8f7b5d;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                padding: 24px 6%;
+            }
+
+            main {
+                width: 90%;
+                padding-top: 45px;
+            }
+
+            .timeline::before {
+                left: 8px;
+            }
+
+            .event,
+            .event:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding: 0 0 35px 32px;
+            }
+
+            .event::after,
+            .event:nth-child(even)::after {
+                left: 2px;
+                right: auto;
+            }
+
+            .event-card {
+                padding: 23px;
+            }
+
+            footer {
+                padding: 22px 5%;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                padding: 10px 12px;
+                font-size: 10px;
+            }
+
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-track">
+        <div class="progress-fill"></div>
+    </div>
+
+    <header>
+        <div class="page-number">СТР. 5 / 7</div>
+    </header>
+
+    <main>
+        <div class="eyebrow">Глава V · После 1221 года</div>
+
+        <h1>Последние годы</h1>
+
+        <p class="intro">
+            Поражение на реке Инд не стало концом борьбы Джалолиддина
+            Мангуберди. Он сумел сохранить часть своих сил, продолжил
+            военную и политическую деятельность и пытался восстановить
+            влияние Хорезмшахов. Однако новые противники и постоянные
+            войны постепенно усложняли его положение.
+        </p>
+
+        <div class="ornament">✦ ХРОНИКА СОБЫТИЙ ✦</div>
+
+        <section class="timeline">
+            <article class="event">
+                <div class="event-card">
+                    <div class="event-symbol">Ⅰ</div>
+                    <div class="year">1221 ГОД</div>
+                    <h2>Переправа через Инд</h2>
+                    <p>
+                        После сражения с войском Чингисхана Джалолиддин
+                        переправился через реку Инд. Он оказался вдали
+                        от своих прежних владений, но не отказался
+                        от продолжения борьбы.
+                    </p>
+                </div>
+            </article>
+
+            <article class="event">
+                <div class="event-card">
+                    <div class="event-symbol">Ⅱ</div>
+                    <div class="year">1221–1224 ГОДЫ</div>
+                    <h2>Новые силы и союзники</h2>
+                    <p>
+                        В Индии Джалолиддин собирал сторонников и укреплял
+                        свои военные позиции. Позднее он вернулся на запад,
+                        стремясь вновь утвердиться в землях бывшего
+                        государства Хорезмшахов.
+                    </p>
+                </div>
+            </article>
+
+            <article class="event">
+                <div class="event-card">
+                    <div class="event-symbol">Ⅲ</div>
+                    <div class="year">1225 ГОД</div>
+                    <h2>Возвращение на запад</h2>
+                    <p>
+                        Джалолиддин вернулся в Иран и продолжил кампании
+                        против местных правителей. Он добивался контроля
+                        над важными территориями и стремился восстановить
+                        могущество своего государства.
+                    </p>
+                </div>
+            </article>
+
+            <article class="event">
+                <div class="event-card">
+                    <div class="event-symbol">Ⅳ</div>
+                    <div class="year">1225–1230 ГОДЫ</div>
+                    <h2>Борьба на нескольких фронтах</h2>
+                    <p>
+                        Его войска действовали в Иране, Закавказье
+                        и соседних регионах. Военные столкновения
+                        с местными правителями и другими силами
+                        истощали ресурсы и затрудняли укрепление власти.
+                    </p>
+                </div>
+            </article>
+
+            <article class="event">
+                <div class="event-card">
+                    <div class="event-symbol">Ⅴ</div>
+                    <div class="year">1230 ГОД</div>
+                    <h2>Ослабление положения</h2>
+                    <p>
+                        После столкновений с коалицией соседних правителей
+                        позиции Джалолиддина стали значительно сложнее.
+                        Ему приходилось действовать в условиях нехватки
+                        устойчивых союзов и постоянной военной угрозы.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <div class="history-note">
+            <strong>Исторический контекст.</strong>
+            После распада прежней державы Джалолиддину пришлось не только
+            противостоять монголам, но и соперничать с правителями
+            соседних государств. Его походы позволяли временно расширять
+            влияние, однако восстановить прежнее государство полностью
+            он не смог.
+        </div>
+
+        <section class="closing">
+            <div class="eyebrow">На пороге финала</div>
+            <h2>Борьба продолжалась до конца</h2>
+            <p>
+                К началу 1230-х годов положение Джалолиддина стало
+                особенно тяжёлым. Впереди были последние события его жизни,
+                которые завершили историю одного из наиболее известных
+                противников монгольского завоевания.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <a class="nav-link" href=" Главные битвы.html">← </a>
+        <a class="nav-link" href="Гибель.html">→</a>
+    </footer>
+</body>
+</html>

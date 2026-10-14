@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гибель — Джалолиддин Мангуберди</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #080e18;
+  --text: #eaf4ff;
+  --muted: #91a8c4;
+  --blue: #55baff;
+  --blue-light: #a3e1ff;
+  --line: #244766;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 80% 10%, #12375b55, transparent 38%),
+    radial-gradient(ellipse at 10% 55%, #0d315033, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.65;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 85.71%;
+  height: 3px;
+  background: linear-gradient(90deg, #237fc5, #a3e1ff);
+  box-shadow: 0 0 12px #55baff88;
+  z-index: 10;
+}
+
+/* Шапка */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 7%;
+  border-bottom: 1px solid #29415a;
+  background: #080e18eF;
+}
+
+
+
+.page-number {
+  color: var(--blue-light);
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--blue);
+  text-shadow: 0 0 12px #55baff66;
+  white-space: nowrap;
+}
+
+/* Главный экран */
+
+.hero {
+  min-height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 60px 7%;
+  background:
+    linear-gradient(90deg, #080e18 5%, #0b1929e8 48%, #0b192988 100%),
+    linear-gradient(0deg, #080e18, transparent 45%),
+    url("images/mountains.jpg") center/cover no-repeat;
+  border-bottom: 1px solid #244766;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border: 1px solid #55baff30;
+  border-radius: 50%;
+  right: -80px;
+  top: 10%;
+  box-shadow:
+    0 0 0 30px #55baff08,
+    0 0 0 60px #55baff06,
+    inset 0 0 70px #55baff09;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 9%;
+  top: 24%;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue));
+  box-shadow: 0 0 18px var(--blue);
+  transform: rotate(-35deg);
+}
+
+.hero-content {
+  max-width: none;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow,
+.section-label {
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  text-shadow: 0 0 35px #55baff22;
+}
+
+/* Заголовок и картинка */
+
+.hero-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+}
+
+.hero-heading h1 {
+  order: 1;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+}
+
+.hero-heading .warrior {
+  order: 2;
+  display: block;
+  width: 440px;
+  max-width: 42%;
+  max-height: 460px;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+  margin-right: 40px;
+  filter: drop-shadow(0 0 24px #55baff88);
+}
+
+.hero-content::before {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 3px;
+  margin-bottom: 22px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+}
+
+.hero p {
+  color: #c0d2e5;
+  max-width: 510px;
+  font-size: 15px;
+}
+
+/* Основные блоки */
+
+section {
+  padding: 34px 7%;
+}
+
+section h2 {
+  font-size: clamp(25px, 4vw, 38px);
+  margin-bottom: 14px;
+}
+
+.intro {
+  max-width: 760px;
+  color: #b7c9dc;
+  margin-bottom: 22px;
+  border-left: 2px solid var(--blue);
+  padding-left: 18px;
+}
+
+/* Декоративная отметка */
+
+.section-label::before {
+  content: "◆";
+  font-size: 9px;
+  margin-right: 10px;
+  color: var(--blue-light);
+}
+
+/* Хронология */
+
+.timeline {
+  position: relative;
+  border-left: 1px solid #37648b;
+  margin: 20px 0 0 7px;
+  padding-left: 27px;
+}
+
+.event {
+  position: relative;
+  margin-bottom: 18px;
+  padding: 16px 20px;
+  background: linear-gradient(110deg, #112237dd, #0c1724aa);
+  border: 1px solid #244766;
+  border-radius: 5px;
+  transition: border-color .25s, transform .25s, background .25s;
+}
+
+.event:last-child {
+  margin-bottom: 0;
+}
+
+.event:hover {
+  border-color: var(--blue);
+  background: #132b43;
+  transform: translateX(5px);
+}
+
+.event::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 24px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 14px #55baff99;
+}
+
+.year {
+  color: var(--blue-light);
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.event p {
+  color: #b9c9d9;
+  font-size: 14px;
+}
+
+/* Финальная цитата */
+
+.epilogue {
+  position: relative;
+  overflow: hidden;
+  margin: 8px 7% 32px;
+  padding: 28px 22px;
+  text-align: center;
+  border-top: 1px solid #37648b;
+  border-bottom: 1px solid #37648b;
+  background: linear-gradient(90deg, transparent, #12375b44, transparent);
+}
+
+.epilogue::before,
+.epilogue::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-size: 20px;
+  text-shadow: 0 0 15px #55baff;
+}
+
+.epilogue::before {
+  left: 15px;
+}
+
+.epilogue::after {
+  right: 15px;
+}
+
+.epilogue h2 {
+  font-size: clamp(21px, 3.5vw, 32px);
+  margin-bottom: 8px;
+}
+
+.epilogue p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Нижняя навигация */
+
+footer {
+  padding: 20px 7%;
+  border-top: 1px solid #29415a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+footer a {
+  color: var(--blue-light);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color .2s;
+}
+
+footer a:hover {
+  color: white;
+}
+
+.footer-note {
+  color: #718aa5;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Телефоны */
+
+@media (max-width: 700px) {
+  header {
+    padding: 17px 5%;
+  }
+
+  .logo {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .page-number {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .hero {
+    min-height: 65vh;
+    padding: 45px 6%;
+    background-position: 60% center;
+  }
+
+  .hero::before {
+    width: 220px;
+    height: 220px;
+    right: -100px;
+    top: 15%;
+  }
+
+  .hero::after {
+    right: 6%;
+    top: 17%;
+    width: 70px;
+  }
+
+  .hero-heading {
+    gap: 10px;
+  }
+
+  .hero-heading h1 {
+    font-size: clamp(28px, 7vw, 44px);
+  }
+
+  .hero-heading .warrior {
+    width: 45%;
+    max-width: 45%;
+    max-height: 290px;
+    margin-right: 0;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  section {
+    padding: 28px 6%;
+  }
+
+  .intro {
+    font-size: 14px;
+    padding-left: 13px;
+  }
+
+  .timeline {
+    padding-left: 21px;
+  }
+
+  .event {
+    padding: 14px;
+  }
+
+  .event::before {
+    left: -28px;
+  }
+
+  .epilogue {
+    margin: 5px 6% 25px;
+    padding: 24px 22px;
+  }
+
+
+
+  footer {
+    padding: 18px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="progress"></div>
+
+<header>
+  
+  <div class="page-number">06 / 07</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Последняя глава</div>
+
+      <div class="hero-heading">
+        <h1>Последний<br>путь</h1>
+
+        <img
+          src="https://ic.pics.livejournal.com/aleks_1958/95804731/79331/79331_original.jpg"
+          alt="Джалолиддин Мангуберди"
+          class="warrior"
+        >
+      </div>
+
+      <p>
+        Даже после великих побед путь воина может завершиться
+        вдали от родины. Но его борьба продолжает жить в памяти
+        поколений.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">1230–1231 годы</div>
+    <h2>Последние годы жизни</h2>
+    <p class="intro">
+      После долгих сражений с монголами и другими противниками
+      положение Джалолиддина становилось всё сложнее. Его войско
+      ослабевало, а политические союзники не всегда оставались верны.
+    </p>
+
+    <div class="timeline">
+      <div class="event">
+        <div class="year">1230</div>
+        <p>
+          После поражения в борьбе с объединёнными противниками
+          Джалолиддин потерял значительную часть своих сил.
+        </p>
+      </div>
+
+      <div class="event">
+        <div class="year">1231</div>
+        <p>
+          Джалолиддин оказался в трудном положении во время
+          отступления. Его дальнейший путь проходил через
+          горные районы Восточной Анатолии.
+        </p>
+      </div>
+
+      <div class="event">
+        <div class="year">Конец пути</div>
+        <p>
+          В 1231 году Джалолиддин погиб на территории нынешней
+          Турции. Точные обстоятельства его гибели в источниках
+          передаются по-разному.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="epilogue">
+    <h2>Человек уходит. История остаётся.</h2>
+    <p>
+      Его государство не сохранилось, но имя Джалолиддина
+      Мангуберди стало символом мужества и сопротивления.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <a href="Последние годы.html">← </a>
+  
+  <a href="Наследие и анализ.html"> →</a>
+</footer>
+</body>
+</html>

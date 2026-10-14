@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жизнь Джалолиддина Мангуберди</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #211a12;
+            color: #f3e5c7;
+            font-family: Georgia, "Times New Roman", serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Длинная шкала прогресса сверху */
+        .top-progress {
+            width: 84%;
+            height: 4px;
+            margin: 18px auto 0;
+            background: #493923;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .top-progress-fill {
+            width: 28.57%;
+            height: 100%;
+            background: #e4bd69;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #e4bd69;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 8% 18px;
+        }
+
+        .page-number {
+            color: #cbb78e;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 25px 35px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+       
+
+        h1 {
+            color: #f5dfaa;
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #c8b99c;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Портрет */
+        .portrait-area {
+            display: flex;
+            justify-content: center;
+            margin: 35px auto 60px;
+        }
+
+        .portrait-frame {
+            width: 230px;
+            height: 255px;
+            padding: 7px;
+            border: 1px solid #c9a45e;
+            background: #38291a;
+            transform: rotate(-2deg);
+            box-shadow: 0 12px 35px #0005;
+        }
+
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portrait-caption {
+            text-align: center;
+            color: #c9a45e;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-top: 15px;
+        }
+
+        .ornament {
+            text-align: center;
+            color: #c9a45e;
+            letter-spacing: 10px;
+            margin-bottom: 40px;
+        }
+
+        /* Исторический маршрут-змейка */
+        .journey {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .journey::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            bottom: 30px;
+            width: 2px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                #c9a45e 8%,
+                #c9a45e 92%,
+                transparent
+            );
+            transform: translateX(-50%);
+        }
+
+        .step {
+            position: relative;
+            width: 50%;
+            padding: 0 38px 55px;
+        }
+
+        .step:nth-child(odd) {
+            margin-left: 50%;
+        }
+
+        .step:nth-child(even) {
+            text-align: right;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 23px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #e6c77f;
+            border: 4px solid #211a12;
+            box-shadow: 0 0 0 1px #c9a45e;
+            z-index: 2;
+        }
+
+        .step:nth-child(odd)::before {
+            left: -7px;
+        }
+
+        .step:nth-child(even)::before {
+            right: -7px;
+        }
+
+        .step-card {
+            background: #352719;
+            border: 1px solid #80633a;
+            padding: 23px;
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .step-card:hover {
+            background: #443321;
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            display: block;
+            color: #d9b568;
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            color: #f0d69a;
+            font-size: 21px;
+            font-weight: normal;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: #e0d2b8;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Нижняя линия и обычные стрелки */
+        .bottom-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #80633a;
+        }
+
+        .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+            min-height: 48px;
+            color: #f0d69a;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 34px;
+            line-height: 1;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .arrow:hover {
+            color: #ffffff;
+            transform: scale(1.12);
+        }
+
+        .arrow-hidden {
+            visibility: hidden;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #4b3924;
+            color: #a99a7d;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        /* Адаптация для телефона */
+        @media (max-width: 650px) {
+            .top-progress {
+                width: 84%;
+                margin-top: 14px;
+            }
+
+            header {
+                padding: 17px 8% 12px;
+            }
+
+            main {
+                padding: 35px 18px 30px;
+            }
+
+            .journey::before {
+                left: 9px;
+            }
+
+            .step,
+            .step:nth-child(odd),
+            .step:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding: 0 0 35px 35px;
+                text-align: left;
+            }
+
+            .step:nth-child(odd)::before,
+            .step:nth-child(even)::before {
+                left: 2px;
+                right: auto;
+            }
+
+            .step-card {
+                padding: 20px;
+            }
+
+            .portrait-frame {
+                width: 200px;
+                height: 225px;
+            }
+
+            .arrow {
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-progress">
+        <div class="top-progress-fill"></div>
+    </div>
+
+    <header>
+        <div class="page-number">СТР. 2 / 7</div>
+    </header>
+
+    <main>
+        <section class="heading">
+            
+            <h1>Джалолиддин Мангуберди</h1>
+
+            <p class="subtitle">
+                История человека, оставившего след в истории Средней Азии
+            </p>
+        </section>
+
+        <section class="portrait-area">
+            <div>
+                <div class="portrait-frame">
+                    <img
+                        src="https://arboblar.uz/upload/people/k/1a26fbf31b1cb898a7d8ee5fa362b3e20426.jpg"
+                        alt="Художественное изображение Джалолиддина Мангуберди"
+                    >
+                </div>
+
+                <p class="portrait-caption">
+                    ДЖАЛОЛИДДИН МАНГУБЕРДИ
+                </p>
+            </div>
+        </section>
+
+        <div class="ornament">✦ ─── ✧ ─── ✦</div>
+
+        <section class="journey">
+
+            <article class="step">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <h2>Происхождение</h2>
+                    <p>
+                        Джалолиддин родился примерно в 1198–1199 годах.
+                        Его отцом был хорезмшах Мухаммад II,
+                        а матерью — Ай-Чичек.
+                    </p>
+                </div>
+            </article>
+
+            <article class="step">
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <h2>Ранние годы</h2>
+                    <p>
+                        Он вырос в семье правителя, где большое
+                        значение имели военное дело, дисциплина
+                        и подготовка к трудностям.
+                    </p>
+                </div>
+            </article>
+
+            <article class="step">
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <h2>Характер и качества</h2>
+                    <p>
+                        Исторические источники описывают Джалолиддина
+                        как смелого и решительного человека,
+                        проявлявшего стойкость в трудных обстоятельствах.
+                    </p>
+                </div>
+            </article>
+
+            <article class="step">
+                <div class="step-card">
+                    <span class="step-number">04</span>
+                    <h2>Историческая память</h2>
+                    <p>
+                        Джалолиддин Мангуберди вошёл в историю
+                        Средней Азии как правитель, известный
+                        своим сопротивлением монгольским завоеваниям.
+                    </p>
+                </div>
+            </article>
+
+        </section>
+
+        <nav class="bottom-navigation">
+            <span class="arrow arrow-hidden" aria-hidden="true">←</span>
+
+            <a
+                class="arrow"
+                href=" Путь к власти.html"
+                aria-label="Следующая страница"
+                title="Следующая страница"
+            >→</a>
+        </nav>
+    </main>
+
+   
+
+</body>
+</html>

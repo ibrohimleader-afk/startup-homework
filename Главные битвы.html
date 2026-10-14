@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главные битвы — Джалолиддин Мангуберди</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #17130e;
+            color: #e8d5ad;
+            font-family: 'PT Serif', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background:
+                radial-gradient(ellipse at 50% 20%, #59412644, transparent 60%),
+                linear-gradient(90deg, #0d0b08, transparent 20%, transparent 80%, #0d0b08);
+        }
+
+        .progress-track {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #403020;
+            z-index: 10;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 57.14%;
+            background: #cba45b;
+            box-shadow: 0 0 14px #cba45b;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 7%;
+            border-bottom: 1px solid #b18b4a55;
+        }
+
+     
+
+        .page-number {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #ad9874;
+        }
+
+        main {
+            width: min(1100px, 86%);
+            margin: auto;
+            padding: 65px 0 100px;
+        }
+
+        .eyebrow {
+            color: #c9a25e;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: clamp(38px, 6vw, 70px);
+            line-height: 1.15;
+            color: #f0dfbd;
+            max-width: 800px;
+        }
+
+        .intro {
+            max-width: 720px;
+            color: #c5b497;
+            line-height: 1.9;
+            font-size: 17px;
+            margin-top: 24px;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 38px 0;
+            color: #c6a05d;
+        }
+
+        .ornament::before,
+        .ornament::after {
+            content: "";
+            height: 1px;
+            background: #b18b4a66;
+            flex: 1;
+        }
+
+        .battle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid #b18b4a66;
+            background: linear-gradient(135deg, #302519, #1d1811 75%);
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px #0005;
+        }
+
+        .battle:nth-of-type(even) .battle-content {
+            order: 2;
+        }
+
+        .battle-art {
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(ellipse at center, #8c693344, transparent 65%),
+                repeating-linear-gradient(35deg, transparent 0 24px, #d2b06b0b 25px 26px),
+                #241c12;
+        }
+
+        .battle-art::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid #c9a25e66;
+        }
+
+        .battle-art svg {
+            width: 85%;
+            max-width: 340px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .battle-content {
+            padding: 38px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .date {
+            color: #d4ad65;
+            letter-spacing: 3px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: clamp(23px, 3vw, 32px);
+            line-height: 1.35;
+            margin-bottom: 20px;
+            color: #f0dfbd;
+        }
+
+        .battle-content p {
+            color: #c4b398;
+            line-height: 1.9;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .fact {
+            border-left: 2px solid #c9a25e;
+            padding: 12px 0 12px 16px;
+            margin-top: 8px;
+            color: #e2c78f;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .map-section {
+            margin-top: 65px;
+            padding: 35px;
+            border: 1px solid #b18b4a66;
+            background: #211a11;
+            text-align: center;
+        }
+
+        .map-section h2 {
+            margin-bottom: 14px;
+        }
+
+        .map-section p {
+            color: #c4b398;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .map {
+            position: relative;
+            min-height: 240px;
+            border: 1px solid #9d7b4655;
+            background:
+                repeating-linear-gradient(0deg, transparent 0 39px, #c9a25e12 40px),
+                repeating-linear-gradient(90deg, transparent 0 39px, #c9a25e12 40px),
+                radial-gradient(ellipse at 50% 50%, #71532c55, #20190f 75%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .route {
+            position: absolute;
+            width: 65%;
+            height: 2px;
+            background: #d0a85f;
+            transform: rotate(-17deg);
+            box-shadow: 0 0 12px #d0a85f88;
+        }
+
+        .place {
+            position: absolute;
+            font-size: 12px;
+            color: #e4c990;
+            background: #211a11;
+            padding: 6px 9px;
+            border: 1px solid #9d7b4688;
+        }
+
+        .place.parvan {
+            left: 14%;
+            top: 30%;
+        }
+
+        .place.indus {
+            right: 12%;
+            bottom: 25%;
+        }
+
+        .map-note {
+            font-size: 12px;
+            color: #9f8a69;
+            margin-top: 15px;
+        }
+
+        footer {
+            border-top: 1px solid #b18b4a55;
+            padding: 25px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #d9b56d;
+            text-decoration: none;
+            border: 1px solid #b18b4a77;
+            padding: 12px 18px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            transition: 0.25s;
+        }
+
+        .nav-link:hover {
+            background: #c9a25e;
+            color: #17130e;
+        }
+
+        .footer-center {
+            color: #8f7b5d;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+            header {
+                padding: 24px 6%;
+            }
+
+            main {
+                width: 90%;
+                padding-top: 45px;
+            }
+
+            .battle {
+                grid-template-columns: 1fr;
+            }
+
+            .battle-art {
+                min-height: 230px;
+            }
+
+            .battle-content {
+                padding: 27px;
+            }
+
+            .battle:nth-of-type(even) .battle-content {
+                order: 0;
+            }
+
+            .map-section {
+                padding: 22px 15px;
+            }
+
+            footer {
+                padding: 22px 5%;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                padding: 10px 12px;
+                font-size: 10px;
+            }
+
+           
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-track">
+        <div class="progress-fill"></div>
+    </div>
+
+    <header>
+        
+        <div class="page-number">СТР. 4 / 7</div>
+    </header>
+
+    <main>
+        <div class="eyebrow">Глава IV · 1221 год</div>
+
+        <h1>Главные битвы</h1>
+
+        <p class="intro">
+            Джалолиддин Мангуберди вошёл в историю как правитель,
+            продолживший сопротивление монгольскому нашествию.
+            В 1221 году его войско одержало заметную победу при Парване,
+            однако последующее столкновение на реке Инд изменило ход
+            его борьбы.
+        </p>
+
+        <div class="ornament">✦</div>
+
+        <section class="battle">
+            <div class="battle-art">
+                <svg viewBox="0 0 360 260" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Схематичное изображение гор и военных знамён">
+                    <path d="M20 205 L95 85 L140 145 L195 48 L270 155 L315 105 L350 205"
+                          stroke="#c9a25e" stroke-width="2"/>
+                    <path d="M20 205 L95 130 L140 170 L195 90 L270 180 L315 145 L350 205"
+                          fill="#94713d" fill-opacity=".14"
+                          stroke="#8e6d3a" stroke-width="1.5"/>
+                    <path d="M30 215 H330" stroke="#c9a25e" stroke-width="1"/>
+                    <path d="M115 180 V105 L145 120 L115 135"
+                          stroke="#d8b56d" stroke-width="2"/>
+                    <path d="M240 180 V90 L270 105 L240 120"
+                          stroke="#d8b56d" stroke-width="2"/>
+                    <circle cx="115" cy="100" r="4" fill="#d8b56d"/>
+                    <circle cx="240" cy="85" r="4" fill="#d8b56d"/>
+                    <path d="M75 230 L95 215 L115 230 M215 230 L235 215 L255 230"
+                          stroke="#8e6d3a" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="battle-content">
+                <div class="date">1221 · АФГАНИСТАН</div>
+                <h2>Битва при Парване</h2>
+
+                <p>
+                    В районе Парвана войско Джалолиддина столкнулось
+                    с монгольским отрядом под командованием Шиги-Кутуку.
+                    Местность и действия хорезмийского войска сыграли
+                    важную роль в ходе сражения.
+                </p>
+
+                <p>
+                    Войско Джалолиддина одержало победу. Это стало одним
+                    из наиболее известных успехов сопротивления монголам
+                    в период их походов в Среднюю Азию.
+                </p>
+
+                <div class="fact">
+                    Значение: победа показала, что монгольские войска
+                    можно было остановить в отдельном сражении.
+                </div>
+            </div>
+        </section>
+
+        <section class="battle">
+            <div class="battle-art">
+                <svg viewBox="0 0 360 260" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Схематичное изображение реки и гор">
+                    <path d="M0 80 L65 40 L115 90 L165 35 L230 85 L285 30 L360 70"
+                          stroke="#b99558" stroke-width="2"/>
+                    <path d="M0 100 L65 60 L115 110 L165 55 L230 105 L285 50 L360 90"
+                          stroke="#8e6d3a" stroke-width="1.5"/>
+                    <path d="M-10 155 C55 125 80 200 145 165 S235 130 370 180"
+                          stroke="#d1b16f" stroke-width="3"/>
+                    <path d="M-10 175 C55 145 80 220 145 185 S235 150 370 200"
+                          stroke="#9a7842" stroke-width="2"/>
+                    <path d="M-10 195 C55 165 80 240 145 205 S235 170 370 220"
+                          stroke="#8e6d3a" stroke-width="1.5"/>
+                    <path d="M80 140 V105 L103 118 L80 130"
+                          stroke="#d8b56d" stroke-width="2"/>
+                    <path d="M260 150 V115 L283 128 L260 140"
+                          stroke="#d8b56d" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="battle-content">
+                <div class="date">1221 · РЕКА ИНД</div>
+                <h2>Сражение на реке Инд</h2>
+
+                <p>
+                    После победы при Парване среди союзников Джалолиддина
+                    возникли разногласия, и часть воинов покинула его.
+                    Вскоре он встретился с главными силами Чингисхана
+                    у реки Инд.
+                </p>
+
+                <p>
+                    Войско Джалолиддина оказалось в тяжёлом положении.
+                    После поражения он переправился через реку и продолжил
+                    свою борьбу за пределами Хорезма.
+                </p>
+
+                <div class="fact">
+                    Значение: сражение стало переломным моментом,
+                    но не завершило военную и политическую деятельность
+                    Джалолиддина.
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="eyebrow">География походов</div>
+            <h2>От Парвана к реке Инд</h2>
+
+            <p>
+                Эти два сражения произошли в ходе событий 1221 года.
+                Они показывают, как быстро менялась обстановка
+                в борьбе Джалолиддина с монгольскими войсками.
+            </p>
+
+            <div class="map">
+                <div class="route"></div>
+                <div class="place parvan">Парван</div>
+                <div class="place indus">Река Инд</div>
+            </div>
+
+            <div class="map-note">
+                Схематичная иллюстрация маршрута, не точная историческая карта.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a class="nav-link" href="Путь к власти.html">← </a>
+        <a class="nav-link" href="Последние годы.html"> →</a>
+    </footer>
+</body>
+</html>
